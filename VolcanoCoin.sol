@@ -1,8 +1,3 @@
-/**
- * Enums
- * can’t use numbers (positive or negative) or boolean (true or false in lowercase) as members for an enum. However, True and False (Capitalised) are accepted.
- *do not need to end the enum declaration with a semicolon. The compiler uses the semicolon ; and curly brackets {} to determine the scope of the code it’s applied to.
- */
 
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
