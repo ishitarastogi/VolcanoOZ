@@ -94,7 +94,7 @@ contract VolcanoCoin is ERC20, Ownable{
         }));
         
         //second  method
-        // payments[msg.sender].push(Payment(amount,recipient, block.timestamp,'', ++id, PaymentTypes.UNKNOWN ));
+        // payments[msg.sender].push(Payment(++id, block.timestamp,, PaymentTypes.UNKNOWN ,'',recipient, ++id));
 
         payments[_msgSender()] = details; //assigning the values to the owner address
         emit transferE(amount,_recipient); //event emitted(logs)
