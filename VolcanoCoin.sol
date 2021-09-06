@@ -105,7 +105,7 @@ contract VolcanoCoin is ERC20, Ownable{
 
     
     function updatePayment(uint _id, PaymentTypes _paymenttype, string memory _comment) public  {
-        require(_id != 0, "Id invalid"); //id should not be equal to zero
+        require(_id != 0, "should be greater than zero"); //id should not be equal to zero
 /**
  * enum return or accept integer value, PaymentTypes.UNKNOWN should be 0 and PaymentTypes.GROUPPAYMENT should be int48
  * the value accepted by the function should be between 1 to 4
@@ -113,15 +113,15 @@ contract VolcanoCoin is ERC20, Ownable{
         require(_paymenttype >= PaymentTypes.UNKNOWN && _paymenttype <= PaymentTypes.GROUPPAYMENT, "Not in range");
         require(bytes(_comment).length != 0, "length should be greater than zero");
         
-        Payment[] storage recordUser = payments[_msgSender()]; //storing data of struct in particular address and assigning it to variable details of type array of struct
-        for(uint i=0; i<recordUser.length; i++){
+        Payment[] storage details = payments[_msgSender()]; //storing data of struct in particular address and assigning it to variable details of type array of struct
+        for(uint i=0; i<details.length; i++){
             
  /**
  *   accessing id of struct   [{id:1,...},{}]           details[0]={id:1,...}  details[0].id=1
  */
  
                 if(recordUser[i].uniqueId == _id){              //if id matches then code inside this executed
-                Payment storage payment = recordUser[i];        //payment= details[0]={id:1,...} 
+                Payment storage payment = details[i];        //payment= details[0]={id:1,...} 
                 payment.paymentTypes = _paymenttype;             //access struct values using dot , updating new PaymentType
                 payment.comment = _comment;                     // updating comment
                 break;                                          //go out off the loop when entered id matches
@@ -136,8 +136,8 @@ contract VolcanoCoin is ERC20, Ownable{
         require(_paymenttype >= PaymentTypes.UNKNOWN && _paymenttype <= PaymentTypes.GROUPPAYMENT, "Not in range");
         require(bytes(_comment).length != 0, "length should be greater than zero");
 
-        string memory text = string(abi.encodePacked( _comment, " updated by ", Strings.toHexString(uint256(uint160(administrator)))));
-        updatePayment(_id, _paymenttype, text);
+        string memory commentadmin = string(abi.encodePacked( _comment, " updated by ", Strings.toHexString(uint256(uint160(administrator)))));
+        updatePayment(_id, _paymenttype, commentadmin);
     }
 
 
